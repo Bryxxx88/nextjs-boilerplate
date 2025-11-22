@@ -22,7 +22,7 @@ export default function HomePage() {
           <div className="hero-right">
             {/* Local uploaded screenshot image */}
             <img
-              src="/mnt/data/AEE16F08-F407-46F6-94BA-7211EC61602F.jpeg"
+              src="/Users/johnbryxjovellanos/Downloads/IMG_3743.jpg"
               alt="project screenshot"
               className="hero-image"
             />
@@ -32,32 +32,32 @@ export default function HomePage() {
 
       <RevealSection id="about" className="container">
         <h2 className="section-title">About</h2>
-        <p className="muted">[ YOUR ABOUT CONTENT WILL GO HERE — paste later ]</p>
+        <p className="muted"></p>
       </RevealSection>
 
       <RevealSection id="experience" className="container">
         <h2 className="section-title">Experience</h2>
-        <p className="muted">[ YOUR EXPERIENCE CONTENT WILL GO HERE — paste later ]</p>
+        <p className="muted"></p>
       </RevealSection>
 
       <RevealSection id="projects" className="container">
         <h2 className="section-title">Projects</h2>
-        <p className="muted">[ YOUR PROJECTS CONTENT WILL GO HERE — paste later ]</p>
+        <p className="muted"></p>
       </RevealSection>
 
       <RevealSection id="skills" className="container">
         <h2 className="section-title">Skills</h2>
-        <p className="muted">[ YOUR SKILLS LIST WILL GO HERE — paste later ]</p>
+        <p className="muted"></p>
       </RevealSection>
 
       <RevealSection id="education" className="container">
         <h2 className="section-title">Education</h2>
-        <p className="muted">[ YOUR EDUCATION DETAILS WILL GO HERE — paste later ]</p>
+        <p className="muted"></p>
       </RevealSection>
 
       <RevealSection id="contact" className="container">
         <h2 className="section-title">Contact</h2>
-        <p className="muted">[ YOUR CONTACT INFO WILL GO HERE — paste later ]</p>
+        <p className="muted"></p>
       </RevealSection>
     </>
   )

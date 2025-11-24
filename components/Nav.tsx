@@ -4,17 +4,19 @@ import { useState, useEffect } from 'react'
 
 const NAV_ITEMS = [
   { label: 'Home', href: '#home' },
-  { label: 'About', href: '#about' },
-  { label: 'Experience', href: '#experience' },
-  { label: 'Projects', href: '#projects' },
+  { label: 'About me', href: '#aboutme' },
   { label: 'Skills', href: '#skills' },
-  { label: 'Education', href: '#education' },
+  { label: 'Projects', href: '#projects' },
   { label: 'Contact', href: '#contact' },
 ]
 
 export default function Nav() {
   const [open, setOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
+
+  function toggleLightMode() {
+    document.body.classList.toggle('light-mode');
+  }
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20)

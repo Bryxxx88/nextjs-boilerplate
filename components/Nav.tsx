@@ -14,6 +14,7 @@ export default function Nav() {
   const [open, setOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const [isDark, setIsDark] = useState(true)
+  const [activeSection, setActiveSection] = useState('home')
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20)
@@ -35,6 +36,31 @@ export default function Nav() {
     }
   }, [])
 
+  // Scroll spy to detect active section
+  useEffect(() => {
+    const handleScroll = () => {
+      const sections = NAV_ITEMS.map(item => item.href.substring(1))
+      const scrollPosition = window.scrollY + 100
+
+      for (const section of sections) {
+        const element = document.getElementById(section)
+        if (element) {
+          const offsetTop = element.offsetTop
+          const offsetBottom = offsetTop + element.offsetHeight
+
+          if (scrollPosition >= offsetTop && scrollPosition < offsetBottom) {
+            setActiveSection(section)
+            break
+          }
+        }
+      }
+    }
+
+    handleScroll() // Initial check
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
   const toggleTheme = () => {
     const newIsDark = !isDark
     setIsDark(newIsDark)
@@ -51,20 +77,28 @@ export default function Nav() {
   return (
     <header className={`navbar ${scrolled ? 'nav-scrolled' : ''}`}>
       <div className="nav-inner">
-        <div className="nav-left">John Bryx Jovellanos</div>
+        <div className="nav-left">
+          <span className="nav-left-text">John Bryx Torralba Jovellanos</span>
+          <span className="nav-left-binary">01001010 01000010 01001010</span>
+        </div>
 
         <div className="nav-right">
           <nav className={`nav-links ${open ? 'open' : ''}`}>
-            {NAV_ITEMS.map((item) => (
-              <a
-                key={item.href}
-                href={item.href}
-                onClick={() => setOpen(false)}
-                className="nav-link"
-              >
-                {item.label}
-              </a>
-            ))}
+            {NAV_ITEMS.map((item) => {
+              const sectionId = item.href.substring(1)
+              const isActive = activeSection === sectionId
+              
+              return (
+                <a
+                  key={item.href}
+                  href={item.href}
+                  onClick={() => setOpen(false)}
+                  className={`nav-link ${isActive ? 'active' : ''}`}
+                >
+                  {item.label}
+                </a>
+              )
+            })}
           </nav>
 
           <button

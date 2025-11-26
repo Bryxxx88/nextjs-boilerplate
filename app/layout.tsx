@@ -5,8 +5,8 @@ import Footer from '@/components/Footer'
 import type { ReactNode } from 'react'
 
 export const metadata = {
-  title: 'John Bryx Jovellanos | Portfolio',
-  description: 'Professional portfolio - John Bryx Jovellanos',
+  title: 'John Bryx Torralba Jovellanos | Portfolio',
+  description: 'Professional portfolio - John Bryx Torralba Jovellanos',
 }
 
 export default function RootLayout({ children }: { children: ReactNode }) {

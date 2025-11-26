@@ -11,7 +11,7 @@ export default function HomePage() {
           <div className="hero-left">
             <h1 className="hero-title">
               Hello, I'm
-              <span className="name">John Bryx Jovellanos</span>
+              <span className="name">John Bryx Torralba Jovellanos</span>
             </h1>
             
             <p className="hero-sub">
@@ -21,7 +21,7 @@ export default function HomePage() {
 
             <div className="hero-ctas">
               <a href="#projects" className="btn btn-primary">
-                View Projects <span>→</span>
+                View Projects
               </a>
               <a href="#contact" className="btn btn-outline">
                 Get in Touch
@@ -32,7 +32,7 @@ export default function HomePage() {
           <div className="photo-placeholder">
             <Image
               src="/bryxxx.jpg"
-              alt="John Bryx Jovellanos"
+              alt="John Bryx Torralba Jovellanos"
               width={420}
               height={420}
               priority
@@ -117,7 +117,7 @@ export default function HomePage() {
       <RevealSection id="contact" className="container">
         <h2 className="section-title">Let's Connect</h2>
         <div className="contact-box">
-          <p>I'm always open to discussing new projects, creative ideas, or opportunities to be part of your vision.</p>
+          <p>I'm always open to discussing new projects, creative ideas, or opportunities to be part of your vision. Let's create something amazing together!</p>
           <div className="contact-socials">
             <div className="contact-email">
               <span className="contact-email-icon">@</span>
@@ -138,7 +138,6 @@ export default function HomePage() {
           </div>
         </div>
       </RevealSection>
-
     </>
   )
 }

@@ -7,7 +7,7 @@ export default function Footer() {
       <div className="footer-inner">
         <div className="footer-bottom">
           <p className="footer-copyright">
-            © {currentYear} John Bryx Jovellanos • Made with <span className="footer-heart">♥</span> using Next.js
+            © {currentYear} John Bryx Torralba Jovellanos • Made with <span className="footer-heart">♥</span> using Next.js
           </p>
           <p className="footer-tagline">Crafting digital experiences, one line of code at a time.</p>
         </div>

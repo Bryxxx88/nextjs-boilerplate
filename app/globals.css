@@ -152,19 +152,49 @@ body.light-mode .navbar {
   font-family: var(--font-display);
   font-size: var(--text-xl);
   font-weight: 700;
-  color: var(--text);
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  position: relative;
+  display: inline-block;
+  min-height: 1.5em;
+}
+
+.nav-left-text {
+  background: linear-gradient(135deg, var(--accent), var(--accent-secondary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  transition: opacity 0.5s ease;
+  display: inline-block;
+}
+
+.nav-left-binary {
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  font-weight: 700;
   letter-spacing: -0.02em;
   background: linear-gradient(135deg, var(--accent), var(--accent-secondary));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  pointer-events: none;
   white-space: nowrap;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: inline-block;
 }
 
-.nav-left:hover {
-  letter-spacing: 0.02em;
-  transform: scale(1.02);
+.nav-left:hover .nav-left-text {
+  opacity: 0;
+}
+
+.nav-left:hover .nav-left-binary {
+  opacity: 1;
 }
 
 .nav-right {
@@ -212,6 +242,27 @@ body.light-mode .navbar {
   color: var(--accent);
   transform: translateY(-1px);
   letter-spacing: 0.08em;
+}
+
+/* Active state for current section */
+.nav-link.active {
+  color: var(--accent);
+}
+
+.nav-link.active::before {
+  opacity: 1;
+}
+
+.nav-link.active::after {
+  content: '';
+  position: absolute;
+  bottom: 2px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 4px;
+  height: 4px;
+  background: var(--accent);
+  border-radius: 50%;
 }
 
 .theme-toggle {
@@ -365,6 +416,24 @@ body.light-mode .navbar {
   line-height: 1.8;
   font-weight: 400;
   animation: slideInFromLeft 1s cubic-bezier(0.4, 0, 0.2, 1) 0.3s backwards;
+  position: relative;
+}
+
+.hero-sub::before {
+  content: '';
+  position: absolute;
+  left: -20px;
+  top: 0;
+  width: 4px;
+  height: 100%;
+  background: linear-gradient(180deg, var(--accent), var(--accent-secondary));
+  border-radius: 2px;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.hero:hover .hero-sub::before {
+  opacity: 1;
 }
 
 .hero-ctas {
@@ -384,6 +453,8 @@ body.light-mode .navbar {
   overflow: hidden;
   box-shadow: var(--shadow-lg);
   animation: slideInFromRight 1s cubic-bezier(0.4, 0, 0.2, 1) 0.3s backwards, float 6s ease-in-out 1.3s infinite;
+  transform-style: preserve-3d;
+  perspective: 1000px;
 }
 
 @keyframes slideInFromRight {
@@ -437,15 +508,31 @@ body.light-mode .navbar {
   opacity: 1;
 }
 
+.photo-placeholder:hover {
+  transform: rotateY(5deg) rotateX(-5deg);
+}
+
 .photo-placeholder img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  animation: fadeInImage 1s ease-out 0.5s backwards;
 }
 
 .photo-placeholder:hover img {
   transform: scale(1.08);
+}
+
+@keyframes fadeInImage {
+  from {
+    opacity: 0;
+    filter: blur(10px);
+  }
+  to {
+    opacity: 1;
+    filter: blur(0);
+  }
 }
 
 /* --- Buttons --- */
@@ -463,13 +550,14 @@ body.light-mode .navbar {
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   overflow: hidden;
   letter-spacing: 0.01em;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .btn::before {
   content: '';
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at center, rgba(255, 255, 255, 0.2), transparent 70%);
+  background: radial-gradient(circle at center, rgba(255, 255, 255, 0.1), transparent 70%);
   opacity: 0;
   transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -478,26 +566,39 @@ body.light-mode .navbar {
   opacity: 1;
 }
 
+.btn:hover {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+.btn:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
 .btn-primary {
-  background: linear-gradient(135deg, var(--accent), var(--accent-secondary));
-  color: #ffffff;
-  box-shadow: var(--shadow-accent);
+  background: var(--box-bg);
+  border: 1px solid var(--border);
+  color: var(--text);
 }
 
 .btn-primary:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #ffffff;
   transform: translateY(-2px);
-  box-shadow: 0 12px 40px rgba(245, 158, 11, 0.3);
+  box-shadow: var(--shadow-accent);
 }
 
 .btn-outline {
   background: transparent;
-  border: 2px solid var(--border);
-  color: var(--text);
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
 }
 
 .btn-outline:hover {
   border-color: var(--accent);
   background: var(--accent-soft);
+  color: var(--accent);
   transform: translateY(-2px);
 }
 
@@ -514,6 +615,8 @@ body.light-mode .navbar {
   margin-bottom: var(--space-2xl);
   position: relative;
   display: inline-block;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
 }
 
 .section-title::before {
@@ -544,6 +647,10 @@ body.light-mode .navbar {
   border-radius: 2px;
 }
 
+.section-title:hover {
+  transform: translateX(8px);
+}
+
 /* --- Content Boxes --- */
 .about-main-box,
 .about-side-box,
@@ -558,6 +665,8 @@ body.light-mode .navbar {
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
   overflow: hidden;
+  cursor: pointer;
+  will-change: transform;
 }
 
 .about-main-box::before,
@@ -686,6 +795,18 @@ body.light-mode .navbar {
   letter-spacing: 0.02em;
   position: relative;
   overflow: hidden;
+  animation: subtlePulse 3s ease-in-out infinite;
+}
+
+.tech-badge:nth-child(1) { animation-delay: 0s; }
+.tech-badge:nth-child(2) { animation-delay: 0.2s; }
+.tech-badge:nth-child(3) { animation-delay: 0.4s; }
+.tech-badge:nth-child(4) { animation-delay: 0.6s; }
+.tech-badge:nth-child(5) { animation-delay: 0.8s; }
+
+@keyframes subtlePulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.02); }
 }
 
 .tech-badge::before {
@@ -704,9 +825,10 @@ body.light-mode .navbar {
 }
 
 .tech-badge:hover {
+  animation: none;
+  transform: translateY(-4px) scale(1.1) rotate(-2deg);
   background: var(--accent);
   color: #ffffff;
-  transform: translateY(-2px) scale(1.05);
   box-shadow: var(--shadow-accent);
 }
 
@@ -932,6 +1054,7 @@ body.light-mode .navbar {
   border-top: 1px solid var(--border);
   padding: var(--space-2xl) 0;
   position: relative;
+  overflow: hidden;
 }
 
 .site-footer::before {
@@ -943,6 +1066,23 @@ body.light-mode .navbar {
   height: 1px;
   background: linear-gradient(90deg, transparent, var(--accent), transparent);
   opacity: 0.3;
+}
+
+.site-footer::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, 
+    transparent,
+    var(--accent),
+    var(--accent-secondary),
+    var(--accent),
+    transparent
+  );
+  animation: borderFlow 3s linear infinite;
 }
 
 .footer-inner {
